@@ -1,11 +1,60 @@
 <!-- VAPI Web Voice SDK -->
-<script src="https://cdn.vapi.ai/sdk/vapi.js"></script>
+ <button id="callButton" class="vapi-call-btn">🎙️ Talk to Our AI Agent</button>
+
+<script>
+  var vapiInstance = null;
+  const assistant = "ID"; // Substitute with your assistant ID
+  const apiKey = "API"; // Substitute with your Public key from Vapi Dashboard.
+  const buttonConfig = {}; // Modify this as required
+
+  (function (d, t) {
+    var g = document.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    g.src =
+      "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+
+    g.onload = function () {
+      vapiInstance = window.vapiSDK.run({
+        apiKey: apiKey, // mandatory
+        assistant: assistant, // mandatory
+        config: buttonConfig, // optional
+      });
+    };
+  })(document, "script");
+</script>
+
+<style>
+.vapi-call-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: #0A66C2;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+.vapi-call-btn:hover {
+  background: #084d96;
+}
+</style>
+
+<!-- VAPI Web Voice SDK -->
+<!-- <script src="https://cdn.vapi.ai/sdk/vapi.js"></script>
 
 <button id="callButton" class="vapi-call-btn">🎙️ Talk to Our AI Agent</button>
 
 <script>
-  const apiKey = "6736e59a-9dbb-488d-a0e9-5988db1784a3";
-  const agentId = "a82420d1-838d-4808-ad3c-87a85adb45d6";
+  const apiKey = "Key";
+  const agentId = "ID";
 
   document.getElementById("callButton").addEventListener("click", async () => {
     try {
@@ -54,3 +103,5 @@
   background: #084d96;
 }
 </style>
+
+-->
