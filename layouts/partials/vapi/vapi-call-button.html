@@ -1,0 +1,56 @@
+<!-- VAPI Web Voice SDK -->
+<script src="https://cdn.vapi.ai/sdk/vapi.js"></script>
+
+<button id="callButton" class="vapi-call-btn">🎙️ Talk to Our AI Agent</button>
+
+<script>
+  const apiKey = "6736e59a-9dbb-488d-a0e9-5988db1784a3";
+  const agentId = "a82420d1-838d-4808-ad3c-87a85adb45d6";
+
+  document.getElementById("callButton").addEventListener("click", async () => {
+    try {
+      // Initialize VAPI voice session
+      const session = await Vapi.init({
+        apiKey,
+        agentId,
+        mode: "voice", // voice only
+      });
+
+      // Start the call using WebRTC
+      await session.start();
+      console.log("✅ WebRTC session started!");
+
+      // Optionally show UI changes
+      document.getElementById("callButton").innerText = "🛑 End Call";
+      document.getElementById("callButton").onclick = async () => {
+        await session.stop();
+        document.getElementById("callButton").innerText = "🎙️ Talk to Our AI Agent";
+      };
+
+    } catch (error) {
+      console.error("❌ VAPI Error:", error);
+      alert("Could not start voice session. Check console for details.");
+    }
+  });
+</script>
+
+<style>
+.vapi-call-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: #0A66C2;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+.vapi-call-btn:hover {
+  background: #084d96;
+}
+</style>
